@@ -20,8 +20,8 @@ namespace HayvanSahiplenmeSitesi.Models
         [StringLength(50)]
         public string Email{ get; set; }
 
-        public ICollection<Hayvan> Hayvan { get; set; }
-
+        public ICollection<Ilan> Ilan { get; set; }
+        
 
     }
 }

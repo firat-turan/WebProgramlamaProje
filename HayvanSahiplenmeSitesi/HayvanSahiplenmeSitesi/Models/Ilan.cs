@@ -10,15 +10,24 @@ namespace HayvanSahiplenmeSitesi.Models
     {
         [Key]
         public int IlanID{ get; set; }
-        public DateTime Tarihi { get; set; }
-
+        public DateTime Tarih { get; set; }
         [StringLength(150)]
         public string Aciklama { get; set; }
+        public int Yas { get; set; }
+        [StringLength(50)]
+        public string AsiDurumu { get; set; }
+        [StringLength(10)]
+        public string Cinsiyet { get; set; }
+        [StringLength(100)]
+        public string Fotograf { get; set; }
+
+        public Hayvan HayvanID { get; set; }
+
+        public Cins CinsID { get; set; }
+ 
+        public IlanSahibi IlanSahibiID { get; set; }
 
 
-
-        public int HayvanID { get; set; }
-        public virtual Hayvan Hayvan { get; set; }
 
     }
 }

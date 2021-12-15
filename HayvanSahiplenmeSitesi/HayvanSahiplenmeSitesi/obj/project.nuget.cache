@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "R2BOKitU+KNVHmPUq+2OdgT5slszjtd4I1jvcj2NH8reWfIM/5WAIA8ciR7dhN/qyp6dZX/OaUxAVPAPgS7MTQ==",
+  "dgSpecHash": "rwy1T1U5o7QCSKArDPDhIPmymf1Ji+8R0BwDB37/xYQwMA9mYHFWzJDfj1aM1/7yVfD4vtZUbMHAkwrE0Uv/iw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\firat\\Desktop\\WebProgramlaProje\\HayvanSahiplenmeSitesi\\HayvanSahiplenmeSitesi\\HayvanSahiplenmeSitesi.csproj",
+  "projectFilePath": "C:\\Users\\firat\\Documents\\GitHub\\WebProgramlamaProje\\HayvanSahiplenmeSitesi\\HayvanSahiplenmeSitesi\\HayvanSahiplenmeSitesi.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\firat\\.nuget\\packages\\humanizer.core\\2.8.26\\humanizer.core.2.8.26.nupkg.sha512",
     "C:\\Users\\firat\\.nuget\\packages\\microsoft.aspnetcore.cryptography.internal\\5.0.10\\microsoft.aspnetcore.cryptography.internal.5.0.10.nupkg.sha512",

@@ -11,5 +11,11 @@ namespace HayvanSahiplenmeSitesi.Models
         public DbSet<Hayvan> Hayvan { get; set; }
         public DbSet<IlanSahibi> IlanSahibi { get; set; }
         public DbSet<Ilan> Ilan { get; set; }
+        public DbSet<Cins> Cins { get; set; }
+
+        public Context(DbContextOptions<Context>options):base(options)
+        {
+
+        }
     }
 }
