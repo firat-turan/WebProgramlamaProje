@@ -19,5 +19,9 @@ namespace HayvanSahiplenme.Models
         {
 
         }
+
+        public HayvanContext()
+        {
+        }
     }
 }
