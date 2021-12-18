@@ -11,6 +11,13 @@ namespace HayvanSahiplenme.Models
         [Key]
         public int IlanId { get; set; }
         public DateTime Tarih { get; set; }
+
+        [StringLength(100)]
+        public string İlanBaslik { get; set; }
+
+        [StringLength(100)]
+        public string İlanBaslikIng { get; set; }
+
         [StringLength(200)]
         public string Aciklama { get; set; }
         [StringLength(200)]

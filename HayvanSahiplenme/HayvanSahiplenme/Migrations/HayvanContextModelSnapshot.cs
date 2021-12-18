@@ -16,7 +16,7 @@ namespace HayvanSahiplenme.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.10")
+                .HasAnnotation("ProductVersion", "5.0.12")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("HayvanSahiplenme.Models.Cins", b =>
@@ -106,6 +106,14 @@ namespace HayvanSahiplenme.Migrations
 
                     b.Property<DateTime>("Tarih")
                         .HasColumnType("datetime2");
+
+                    b.Property<string>("İlanBaslik")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("İlanBaslikIng")
+                        .HasMaxLength(100)
+                        .HasColumnType("nvarchar(100)");
 
                     b.HasKey("IlanId");
 

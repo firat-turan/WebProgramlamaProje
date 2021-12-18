@@ -1,0 +1,47 @@
+﻿@model IEnumerable<HayvanSahiplenme.Models.Cins>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.CinsAd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CinsAdIng)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.HayvanId)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CinsAd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CinsAdIng)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.HayvanId)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.CinsId">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.CinsId">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.CinsId">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HayvanSahiplenme.Models;
 
 namespace HayvanSahiplenme.Models
 {
@@ -23,5 +24,7 @@ namespace HayvanSahiplenme.Models
         public HayvanContext()
         {
         }
+
+        public DbSet<HayvanSahiplenme.Models.Hayvan> Hayvan { get; set; }
     }
 }
