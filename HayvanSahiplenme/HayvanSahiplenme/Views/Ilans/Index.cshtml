@@ -22,6 +22,27 @@
                 @Html.DisplayNameFor(model => model.İlanBaslikIng)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.HayvanAd)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cins)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Cinsiyet)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.CinsiyetIng)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Yas)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AsiDurumu)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AsiDurumuIng)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Aciklama)
             </th>
             <th>
@@ -29,9 +50,6 @@
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Fotograf)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Hayvan)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Kullanici)
@@ -52,19 +70,38 @@
                 @Html.DisplayFor(modelItem => item.İlanBaslikIng)
             </td>
             <td>
+                @Html.DisplayFor(modelItem => item.HayvanAd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cins.CinsAd)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Cinsiyet)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CinsiyetIng)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Yas)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AsiDurumu)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.AsiDurumuIng)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Aciklama)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.AciklamaIng)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Fotograf)
+                <img src="@("/image/"+ item.Fotograf)" asp-append-version="true" />
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Hayvan.HayvanId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Kullanici.KullaniciId)
+                @Html.DisplayFor(modelItem => item.Kullanici.Ad) @Html.DisplayFor(modelItem => item.Kullanici.Soyad)
+
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IlanId">Edit</a> |

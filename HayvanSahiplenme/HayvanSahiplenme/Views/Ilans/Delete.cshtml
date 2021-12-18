@@ -30,6 +30,48 @@
             @Html.DisplayFor(model => model.İlanBaslikIng)
         </dd>
         <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.HayvanAd)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.HayvanAd)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cins)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cins.CinsAd)
+        </dd class>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Cinsiyet)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Cinsiyet)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.CinsiyetIng)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.CinsiyetIng)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Yas)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Yas)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AsiDurumu)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AsiDurumu)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.AsiDurumuIng)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.AsiDurumuIng)
+        </dd>
+        <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Aciklama)
         </dt>
         <dd class = "col-sm-10">
@@ -45,19 +87,13 @@
             @Html.DisplayNameFor(model => model.Fotograf)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Fotograf)
+            <img src="@("/image/"+ Model.Fotograf)" asp-append-version="true"/>
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.Hayvan)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Hayvan.HayvanId)
-        </dd class>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Kullanici)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.Kullanici.KullaniciId)
+            @Html.DisplayFor(model => model.Kullanici.Ad)
         </dd class>
     </dl>
     

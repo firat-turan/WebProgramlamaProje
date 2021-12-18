@@ -15,10 +15,10 @@ namespace HayvanSahiplenme.Models
         [StringLength(50)]
         public string CinsAdIng { get; set; }
         
-        public int HayvanId { get; set; }
+        public int TurId { get; set; }
         public Tur Tur { get; set; }
 
-        public ICollection<Hayvan> Hayvan{ get; set; }
+       
 
 
     }

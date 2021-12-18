@@ -24,7 +24,5 @@ namespace HayvanSahiplenme.Models
         public HayvanContext()
         {
         }
-
-        public DbSet<HayvanSahiplenme.Models.Hayvan> Hayvan { get; set; }
     }
 }

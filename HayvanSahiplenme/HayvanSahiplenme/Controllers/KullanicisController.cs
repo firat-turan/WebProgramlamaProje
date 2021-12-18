@@ -9,23 +9,22 @@ using HayvanSahiplenme.Models;
 
 namespace HayvanSahiplenme.Controllers
 {
-    public class HayvansController : Controller
+    public class KullanicisController : Controller
     {
         private readonly HayvanContext _context;
 
-        public HayvansController(HayvanContext context)
+        public KullanicisController(HayvanContext context)
         {
             _context = context;
         }
 
-        // GET: Hayvans
+        // GET: Kullanicis
         public async Task<IActionResult> Index()
         {
-            var hayvanContext = _context.Hayvan.Include(h => h.Cins);
-            return View(await hayvanContext.ToListAsync());
+            return View(await _context.Kullanici.ToListAsync());
         }
 
-        // GET: Hayvans/Details/5
+        // GET: Kullanicis/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -33,42 +32,39 @@ namespace HayvanSahiplenme.Controllers
                 return NotFound();
             }
 
-            var hayvan = await _context.Hayvan
-                .Include(h => h.Cins)
-                .FirstOrDefaultAsync(m => m.HayvanId == id);
-            if (hayvan == null)
+            var kullanici = await _context.Kullanici
+                .FirstOrDefaultAsync(m => m.KullaniciId == id);
+            if (kullanici == null)
             {
                 return NotFound();
             }
 
-            return View(hayvan);
+            return View(kullanici);
         }
 
-        // GET: Hayvans/Create
+        // GET: Kullanicis/Create
         public IActionResult Create()
         {
-            ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsId");
             return View();
         }
 
-        // POST: Hayvans/Create
+        // POST: Kullanicis/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("HayvanId,Cinsiyet,CinsiyetIng,Yas,AsiDurumu,AsiDurumuIng,CinsId")] Hayvan hayvan)
+        public async Task<IActionResult> Create([Bind("KullaniciId,Ad,Soyad,TcNo,TelNo,Adress,Email")] Kullanici kullanici)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(hayvan);
+                _context.Add(kullanici);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsId", hayvan.CinsId);
-            return View(hayvan);
+            return View(kullanici);
         }
 
-        // GET: Hayvans/Edit/5
+        // GET: Kullanicis/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -76,23 +72,22 @@ namespace HayvanSahiplenme.Controllers
                 return NotFound();
             }
 
-            var hayvan = await _context.Hayvan.FindAsync(id);
-            if (hayvan == null)
+            var kullanici = await _context.Kullanici.FindAsync(id);
+            if (kullanici == null)
             {
                 return NotFound();
             }
-            ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsId", hayvan.CinsId);
-            return View(hayvan);
+            return View(kullanici);
         }
 
-        // POST: Hayvans/Edit/5
+        // POST: Kullanicis/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("HayvanId,Cinsiyet,CinsiyetIng,Yas,AsiDurumu,AsiDurumuIng,CinsId")] Hayvan hayvan)
+        public async Task<IActionResult> Edit(int id, [Bind("KullaniciId,Ad,Soyad,TcNo,TelNo,Adress,Email")] Kullanici kullanici)
         {
-            if (id != hayvan.HayvanId)
+            if (id != kullanici.KullaniciId)
             {
                 return NotFound();
             }
@@ -101,12 +96,12 @@ namespace HayvanSahiplenme.Controllers
             {
                 try
                 {
-                    _context.Update(hayvan);
+                    _context.Update(kullanici);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!HayvanExists(hayvan.HayvanId))
+                    if (!KullaniciExists(kullanici.KullaniciId))
                     {
                         return NotFound();
                     }
@@ -117,11 +112,10 @@ namespace HayvanSahiplenme.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsId", hayvan.CinsId);
-            return View(hayvan);
+            return View(kullanici);
         }
 
-        // GET: Hayvans/Delete/5
+        // GET: Kullanicis/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -129,31 +123,30 @@ namespace HayvanSahiplenme.Controllers
                 return NotFound();
             }
 
-            var hayvan = await _context.Hayvan
-                .Include(h => h.Cins)
-                .FirstOrDefaultAsync(m => m.HayvanId == id);
-            if (hayvan == null)
+            var kullanici = await _context.Kullanici
+                .FirstOrDefaultAsync(m => m.KullaniciId == id);
+            if (kullanici == null)
             {
                 return NotFound();
             }
 
-            return View(hayvan);
+            return View(kullanici);
         }
 
-        // POST: Hayvans/Delete/5
+        // POST: Kullanicis/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var hayvan = await _context.Hayvan.FindAsync(id);
-            _context.Hayvan.Remove(hayvan);
+            var kullanici = await _context.Kullanici.FindAsync(id);
+            _context.Kullanici.Remove(kullanici);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool HayvanExists(int id)
+        private bool KullaniciExists(int id)
         {
-            return _context.Hayvan.Any(e => e.HayvanId == id);
+            return _context.Kullanici.Any(e => e.KullaniciId == id);
         }
     }
 }

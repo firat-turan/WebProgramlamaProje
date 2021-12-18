@@ -6,22 +6,26 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HayvanSahiplenme.Models;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace HayvanSahiplenme.Controllers
 {
     public class IlansController : Controller
     {
         private readonly HayvanContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
 
-        public IlansController(HayvanContext context)
+        public IlansController(HayvanContext context,IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            this._hostEnvironment = hostEnvironment;
         }
 
         // GET: Ilans
         public async Task<IActionResult> Index()
         {
-            var hayvanContext = _context.Ilans.Include(i => i.Hayvan).Include(i => i.Kullanici);
+            var hayvanContext = _context.Ilans.Include(i => i.Cins).Include(i => i.Kullanici);
             return View(await hayvanContext.ToListAsync());
         }
 
@@ -34,7 +38,7 @@ namespace HayvanSahiplenme.Controllers
             }
 
             var ilan = await _context.Ilans
-                .Include(i => i.Hayvan)
+                .Include(i => i.Cins)
                 .Include(i => i.Kullanici)
                 .FirstOrDefaultAsync(m => m.IlanId == id);
             if (ilan == null)
@@ -48,8 +52,8 @@ namespace HayvanSahiplenme.Controllers
         // GET: Ilans/Create
         public IActionResult Create()
         {
-            ViewData["HayvanId"] = new SelectList(_context.Hayvan, "HayvanId", "HayvanId");
-            ViewData["KullaniciId"] = new SelectList(_context.Kullanici, "KullaniciId", "KullaniciId");
+            ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsAd");
+            ViewData["KullaniciId"] = new SelectList(_context.Kullanici, "KullaniciId", "Ad");
             return View();
         }
 
@@ -58,16 +62,27 @@ namespace HayvanSahiplenme.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IlanId,Tarih,İlanBaslik,İlanBaslikIng,Aciklama,AciklamaIng,Fotograf,HayvanId,KullaniciId")] Ilan ilan)
+        public async Task<IActionResult> Create([Bind("IlanId,İlanBaslik,İlanBaslikIng,HayvanAd,CinsId,Cinsiyet,CinsiyetIng,Yas,AsiDurumu,AsiDurumuIng,Aciklama,AciklamaIng,ImageFile,KullaniciId")] Ilan ilan)
         {
             if (ModelState.IsValid)
             {
+                string wwwrootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(ilan.ImageFile.FileName);
+                string extension = Path.GetExtension(ilan.ImageFile.FileName);
+                ilan.Fotograf = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string path = Path.Combine(wwwrootPath + "/Image/", fileName);
+                using (var fileStream = new FileStream(path,FileMode.Create))
+                {
+                    await ilan.ImageFile.CopyToAsync(fileStream);
+                }
+
+                ilan.Tarih = DateTime.Now;
                 _context.Add(ilan);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HayvanId"] = new SelectList(_context.Hayvan, "HayvanId", "HayvanId", ilan.HayvanId);
-            ViewData["KullaniciId"] = new SelectList(_context.Kullanici, "KullaniciId", "KullaniciId", ilan.KullaniciId);
+            ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsAd", ilan.CinsId);
+            ViewData["KullaniciId"] = new SelectList(_context.Kullanici, "KullaniciId", "Ad", ilan.KullaniciId);
             return View(ilan);
         }
 
@@ -84,8 +99,8 @@ namespace HayvanSahiplenme.Controllers
             {
                 return NotFound();
             }
-            ViewData["HayvanId"] = new SelectList(_context.Hayvan, "HayvanId", "HayvanId", ilan.HayvanId);
-            ViewData["KullaniciId"] = new SelectList(_context.Kullanici, "KullaniciId", "KullaniciId", ilan.KullaniciId);
+            ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsAd", ilan.CinsId);
+            ViewData["KullaniciId"] = new SelectList(_context.Kullanici, "KullaniciId", "Ad", ilan.KullaniciId);
             return View(ilan);
         }
 
@@ -94,7 +109,7 @@ namespace HayvanSahiplenme.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IlanId,Tarih,İlanBaslik,İlanBaslikIng,Aciklama,AciklamaIng,Fotograf,HayvanId,KullaniciId")] Ilan ilan)
+        public async Task<IActionResult> Edit(int id, [Bind("IlanId,İlanBaslik,İlanBaslikIng,HayvanAd,CinsId,Cinsiyet,CinsiyetIng,Yas,AsiDurumu,AsiDurumuIng,Aciklama,AciklamaIng,Fotograf,KullaniciId")] Ilan ilan)
         {
             if (id != ilan.IlanId)
             {
@@ -105,6 +120,7 @@ namespace HayvanSahiplenme.Controllers
             {
                 try
                 {
+                    ilan.Tarih = DateTime.Now;
                     _context.Update(ilan);
                     await _context.SaveChangesAsync();
                 }
@@ -121,8 +137,8 @@ namespace HayvanSahiplenme.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["HayvanId"] = new SelectList(_context.Hayvan, "HayvanId", "HayvanId", ilan.HayvanId);
-            ViewData["KullaniciId"] = new SelectList(_context.Kullanici, "KullaniciId", "KullaniciId", ilan.KullaniciId);
+            ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsAd", ilan.CinsId);
+            ViewData["KullaniciId"] = new SelectList(_context.Kullanici, "KullaniciId", "Ad", ilan.KullaniciId);
             return View(ilan);
         }
 
@@ -135,7 +151,7 @@ namespace HayvanSahiplenme.Controllers
             }
 
             var ilan = await _context.Ilans
-                .Include(i => i.Hayvan)
+                .Include(i => i.Cins)
                 .Include(i => i.Kullanici)
                 .FirstOrDefaultAsync(m => m.IlanId == id);
             if (ilan == null)
@@ -152,6 +168,11 @@ namespace HayvanSahiplenme.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var ilan = await _context.Ilans.FindAsync(id);
+
+            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "image", ilan.Fotograf);
+            if (System.IO.File.Exists(imagePath))
+                System.IO.File.Delete(imagePath);
+
             _context.Ilans.Remove(ilan);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));

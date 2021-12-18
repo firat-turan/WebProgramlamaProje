@@ -21,7 +21,8 @@ namespace HayvanSahiplenme.Controllers
         // GET: Cins
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Cins.ToListAsync());
+            var hayvanContext = _context.Cins.Include(c => c.Tur);
+            return View(await hayvanContext.ToListAsync());
         }
 
         // GET: Cins/Details/5
@@ -33,6 +34,7 @@ namespace HayvanSahiplenme.Controllers
             }
 
             var cins = await _context.Cins
+                .Include(c => c.Tur)
                 .FirstOrDefaultAsync(m => m.CinsId == id);
             if (cins == null)
             {
@@ -45,12 +47,7 @@ namespace HayvanSahiplenme.Controllers
         // GET: Cins/Create
         public IActionResult Create()
         {
-            List<SelectListItem> turs = new List<SelectListItem>();
-            foreach (var item in _context.Tur.ToList())
-            {
-                turs.Add(new SelectListItem { Text = item.TurAd, Value = item.TurId.ToString() });
-            }
-            ViewBag.Turs = turs;
+            ViewData["TurId"] = new SelectList(_context.Tur, "TurId", "TurAd");
             return View();
         }
 
@@ -59,7 +56,7 @@ namespace HayvanSahiplenme.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("CinsId,CinsAd,CinsAdIng,HayvanId")] Cins cins)
+        public async Task<IActionResult> Create([Bind("CinsId,CinsAd,CinsAdIng,TurId")] Cins cins)
         {
             if (ModelState.IsValid)
             {
@@ -67,6 +64,7 @@ namespace HayvanSahiplenme.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["TurId"] = new SelectList(_context.Tur, "TurId", "TurAd", cins.TurId);
             return View(cins);
         }
 
@@ -83,6 +81,7 @@ namespace HayvanSahiplenme.Controllers
             {
                 return NotFound();
             }
+            ViewData["TurId"] = new SelectList(_context.Tur, "TurId", "TurAd", cins.TurId);
             return View(cins);
         }
 
@@ -91,7 +90,7 @@ namespace HayvanSahiplenme.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("CinsId,CinsAd,CinsAdIng,HayvanId")] Cins cins)
+        public async Task<IActionResult> Edit(int id, [Bind("CinsId,CinsAd,CinsAdIng,TurId")] Cins cins)
         {
             if (id != cins.CinsId)
             {
@@ -118,6 +117,7 @@ namespace HayvanSahiplenme.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["TurId"] = new SelectList(_context.Tur, "TurId", "TurAd", cins.TurId);
             return View(cins);
         }
 
@@ -130,6 +130,7 @@ namespace HayvanSahiplenme.Controllers
             }
 
             var cins = await _context.Cins
+                .Include(c => c.Tur)
                 .FirstOrDefaultAsync(m => m.CinsId == id);
             if (cins == null)
             {

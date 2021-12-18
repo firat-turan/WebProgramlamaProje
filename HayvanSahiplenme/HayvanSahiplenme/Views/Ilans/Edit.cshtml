@@ -14,11 +14,6 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IlanId" />
             <div class="form-group">
-                <label asp-for="Tarih" class="control-label"></label>
-                <input asp-for="Tarih" class="form-control" />
-                <span asp-validation-for="Tarih" class="text-danger"></span>
-            </div>
-            <div class="form-group">
                 <label asp-for="İlanBaslik" class="control-label"></label>
                 <input asp-for="İlanBaslik" class="form-control" />
                 <span asp-validation-for="İlanBaslik" class="text-danger"></span>
@@ -27,6 +22,41 @@
                 <label asp-for="İlanBaslikIng" class="control-label"></label>
                 <input asp-for="İlanBaslikIng" class="form-control" />
                 <span asp-validation-for="İlanBaslikIng" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="HayvanAd" class="control-label"></label>
+                <input asp-for="HayvanAd" class="form-control" />
+                <span asp-validation-for="HayvanAd" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CinsId" class="control-label"></label>
+                <select asp-for="CinsId" class="form-control" asp-items="ViewBag.CinsId"></select>
+                <span asp-validation-for="CinsId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Cinsiyet" class="control-label"></label>
+                <input asp-for="Cinsiyet" class="form-control" />
+                <span asp-validation-for="Cinsiyet" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CinsiyetIng" class="control-label"></label>
+                <input asp-for="CinsiyetIng" class="form-control" />
+                <span asp-validation-for="CinsiyetIng" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Yas" class="control-label"></label>
+                <input asp-for="Yas" class="form-control" />
+                <span asp-validation-for="Yas" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AsiDurumu" class="control-label"></label>
+                <input asp-for="AsiDurumu" class="form-control" />
+                <span asp-validation-for="AsiDurumu" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="AsiDurumuIng" class="control-label"></label>
+                <input asp-for="AsiDurumuIng" class="form-control" />
+                <span asp-validation-for="AsiDurumuIng" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="Aciklama" class="control-label"></label>
@@ -42,11 +72,6 @@
                 <label asp-for="Fotograf" class="control-label"></label>
                 <input asp-for="Fotograf" class="form-control" />
                 <span asp-validation-for="Fotograf" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="HayvanId" class="control-label"></label>
-                <select asp-for="HayvanId" class="form-control" asp-items="ViewBag.HayvanId"></select>
-                <span asp-validation-for="HayvanId" class="text-danger"></span>
             </div>
             <div class="form-group">
                 <label asp-for="KullaniciId" class="control-label"></label>

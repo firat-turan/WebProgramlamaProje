@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace HayvanSahiplenme.Migrations
 {
-    public partial class AllDB : Migration
+    public partial class AllDb : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -47,8 +47,7 @@ namespace HayvanSahiplenme.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CinsAd = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     CinsAdIng = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
-                    HayvanId = table.Column<int>(type: "int", nullable: false),
-                    TurId = table.Column<int>(type: "int", nullable: true)
+                    TurId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -58,30 +57,6 @@ namespace HayvanSahiplenme.Migrations
                         column: x => x.TurId,
                         principalTable: "Tur",
                         principalColumn: "TurId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Hayvan",
-                columns: table => new
-                {
-                    HayvanId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    Cinsiyet = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CinsiyetIng = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Yas = table.Column<int>(type: "int", nullable: false),
-                    AsiDurumu = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    AsiDurumuIng = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    CinsId = table.Column<int>(type: "int", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Hayvan", x => x.HayvanId);
-                    table.ForeignKey(
-                        name: "FK_Hayvan_Cins_CinsId",
-                        column: x => x.CinsId,
-                        principalTable: "Cins",
-                        principalColumn: "CinsId",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -94,20 +69,26 @@ namespace HayvanSahiplenme.Migrations
                     Tarih = table.Column<DateTime>(type: "datetime2", nullable: false),
                     İlanBaslik = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
                     İlanBaslikIng = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
+                    HayvanAd = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CinsId = table.Column<int>(type: "int", nullable: false),
+                    Cinsiyet = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    CinsiyetIng = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    Yas = table.Column<int>(type: "int", nullable: false),
+                    AsiDurumu = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
+                    AsiDurumuIng = table.Column<string>(type: "nvarchar(50)", maxLength: 50, nullable: true),
                     Aciklama = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     AciklamaIng = table.Column<string>(type: "nvarchar(200)", maxLength: 200, nullable: true),
                     Fotograf = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: true),
-                    HayvanId = table.Column<int>(type: "int", nullable: false),
                     KullaniciId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Ilans", x => x.IlanId);
                     table.ForeignKey(
-                        name: "FK_Ilans_Hayvan_HayvanId",
-                        column: x => x.HayvanId,
-                        principalTable: "Hayvan",
-                        principalColumn: "HayvanId",
+                        name: "FK_Ilans_Cins_CinsId",
+                        column: x => x.CinsId,
+                        principalTable: "Cins",
+                        principalColumn: "CinsId",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Ilans_Kullanici_KullaniciId",
@@ -123,14 +104,9 @@ namespace HayvanSahiplenme.Migrations
                 column: "TurId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Hayvan_CinsId",
-                table: "Hayvan",
-                column: "CinsId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Ilans_HayvanId",
+                name: "IX_Ilans_CinsId",
                 table: "Ilans",
-                column: "HayvanId");
+                column: "CinsId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Ilans_KullaniciId",
@@ -144,13 +120,10 @@ namespace HayvanSahiplenme.Migrations
                 name: "Ilans");
 
             migrationBuilder.DropTable(
-                name: "Hayvan");
+                name: "Cins");
 
             migrationBuilder.DropTable(
                 name: "Kullanici");
-
-            migrationBuilder.DropTable(
-                name: "Cins");
 
             migrationBuilder.DropTable(
                 name: "Tur");

@@ -34,10 +34,7 @@ namespace HayvanSahiplenme.Migrations
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("HayvanId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("TurId")
+                    b.Property<int>("TurId")
                         .HasColumnType("int");
 
                     b.HasKey("CinsId");
@@ -45,38 +42,6 @@ namespace HayvanSahiplenme.Migrations
                     b.HasIndex("TurId");
 
                     b.ToTable("Cins");
-                });
-
-            modelBuilder.Entity("HayvanSahiplenme.Models.Hayvan", b =>
-                {
-                    b.Property<int>("HayvanId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("AsiDurumu")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("AsiDurumuIng")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("CinsId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Cinsiyet")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("CinsiyetIng")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Yas")
-                        .HasColumnType("int");
-
-                    b.HasKey("HayvanId");
-
-                    b.HasIndex("CinsId");
-
-                    b.ToTable("Hayvan");
                 });
 
             modelBuilder.Entity("HayvanSahiplenme.Models.Ilan", b =>
@@ -94,18 +59,37 @@ namespace HayvanSahiplenme.Migrations
                         .HasMaxLength(200)
                         .HasColumnType("nvarchar(200)");
 
-                    b.Property<string>("Fotograf")
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
+                    b.Property<string>("AsiDurumu")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
-                    b.Property<int>("HayvanId")
+                    b.Property<string>("AsiDurumuIng")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("CinsId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Cinsiyet")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("CinsiyetIng")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<string>("HayvanAd")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("KullaniciId")
                         .HasColumnType("int");
 
                     b.Property<DateTime>("Tarih")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("Yas")
+                        .HasColumnType("int");
 
                     b.Property<string>("İlanBaslik")
                         .HasMaxLength(100)
@@ -117,7 +101,7 @@ namespace HayvanSahiplenme.Migrations
 
                     b.HasKey("IlanId");
 
-                    b.HasIndex("HayvanId");
+                    b.HasIndex("CinsId");
 
                     b.HasIndex("KullaniciId");
 
@@ -184,27 +168,18 @@ namespace HayvanSahiplenme.Migrations
                 {
                     b.HasOne("HayvanSahiplenme.Models.Tur", "Tur")
                         .WithMany("Cins")
-                        .HasForeignKey("TurId");
+                        .HasForeignKey("TurId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("Tur");
                 });
 
-            modelBuilder.Entity("HayvanSahiplenme.Models.Hayvan", b =>
-                {
-                    b.HasOne("HayvanSahiplenme.Models.Cins", "Cins")
-                        .WithMany("Hayvan")
-                        .HasForeignKey("CinsId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Cins");
-                });
-
             modelBuilder.Entity("HayvanSahiplenme.Models.Ilan", b =>
                 {
-                    b.HasOne("HayvanSahiplenme.Models.Hayvan", "Hayvan")
-                        .WithMany("Ilans")
-                        .HasForeignKey("HayvanId")
+                    b.HasOne("HayvanSahiplenme.Models.Cins", "Cins")
+                        .WithMany()
+                        .HasForeignKey("CinsId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
@@ -214,19 +189,9 @@ namespace HayvanSahiplenme.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Hayvan");
+                    b.Navigation("Cins");
 
                     b.Navigation("Kullanici");
-                });
-
-            modelBuilder.Entity("HayvanSahiplenme.Models.Cins", b =>
-                {
-                    b.Navigation("Hayvan");
-                });
-
-            modelBuilder.Entity("HayvanSahiplenme.Models.Hayvan", b =>
-                {
-                    b.Navigation("Ilans");
                 });
 
             modelBuilder.Entity("HayvanSahiplenme.Models.Tur", b =>
