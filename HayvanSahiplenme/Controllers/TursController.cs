@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HayvanSahiplenme.Data;
 using HayvanSahiplenme.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HayvanSahiplenme.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class TursController : Controller
     {
         private readonly ApplicationDbContext _context;
@@ -20,12 +22,14 @@ namespace HayvanSahiplenme.Controllers
         }
 
         // GET: Turs
+       
         public async Task<IActionResult> Index()
         {
             return View(await _context.Tur.ToListAsync());
         }
 
         // GET: Turs/Details/5
+        
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -44,6 +48,7 @@ namespace HayvanSahiplenme.Controllers
         }
 
         // GET: Turs/Create
+        
         public IActionResult Create()
         {
             return View();
@@ -54,6 +59,7 @@ namespace HayvanSahiplenme.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Create([Bind("TurId,TurAd,TurAdIng")] Tur tur)
         {
             if (ModelState.IsValid)
@@ -66,6 +72,7 @@ namespace HayvanSahiplenme.Controllers
         }
 
         // GET: Turs/Edit/5
+        
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -86,6 +93,7 @@ namespace HayvanSahiplenme.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
+        
         public async Task<IActionResult> Edit(int id, [Bind("TurId,TurAd,TurAdIng")] Tur tur)
         {
             if (id != tur.TurId)
@@ -117,6 +125,7 @@ namespace HayvanSahiplenme.Controllers
         }
 
         // GET: Turs/Delete/5
+        
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
