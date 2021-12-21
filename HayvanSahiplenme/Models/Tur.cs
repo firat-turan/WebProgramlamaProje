@@ -10,8 +10,12 @@ namespace HayvanSahiplenme.Models
     {
         [Key]
         public int TurId { get; set; }
+        [Required]
+        [Display(Name = "Tür")]
         [StringLength(50)]
         public string TurAd { get; set; }
+        [Required]
+        [Display(Name = "Tür İngilizce")]
         [StringLength(50)]
         public string TurAdIng { get; set; }
 
