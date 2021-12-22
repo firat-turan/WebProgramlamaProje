@@ -693,7 +693,6 @@ C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\n
 C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Cins\Edit.cshtml.g.cs
 C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Cins\Index.cshtml.g.cs
 C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Home\Index.cshtml.g.cs
-C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Home\Privacy.cshtml.g.cs
 C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Ilans\Create.cshtml.g.cs
 C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Ilans\Delete.cshtml.g.cs
 C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Ilans\Details.cshtml.g.cs
@@ -719,4 +718,7 @@ C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\n
 C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\HayvanSahiplenme.pdb
 C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\HayvanSahiplenme.genruntimeconfig.cache
 C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Home\Details.cshtml.g.cs
-C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Home\deneme.cshtml.g.cs
+C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Home\KopekIlanlari.cshtml.g.cs
+C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Home\KediIlanlari.cshtml.g.cs
+C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Home\Ilanlar.cshtml.g.cs
+C:\Users\firat\Documents\GitHub\WebProgramlamaProje\HayvanSahiplenme\obj\Debug\net5.0\Razor\Views\Ilans\Ilanlarim.cshtml.g.cs

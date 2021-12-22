@@ -29,21 +29,41 @@ namespace HayvanSahiplenme.Controllers
         {
             //List<Ilan> ilan = db.Ilans.Include(ilan => ilan.İlanBaslik).ToList();
 
-            var ilan2 = (from iln in _db.Ilans
+            var ilan = (from iln in _db.Ilans
                          orderby iln.IlanId descending
                          select iln).Take(20).ToList();
-            return View(ilan2);
+            return View(ilan);
+        }
+        public IActionResult Ilanlar()
+        {
+            //List<Ilan> ilan = db.Ilans.Include(ilan => ilan.İlanBaslik).ToList();
+
+            var ilan = (from iln in _db.Ilans
+                        orderby iln.IlanId descending
+                        select iln).ToList();
+            return View(ilan);
+        }
+        public IActionResult KopekIlanlari()
+        {
+            //List<Ilan> ilan = db.Ilans.Include(ilan => ilan.İlanBaslik).ToList();
+
+            var ilan = (from iln in _db.Ilans
+                         where iln.Cins.TurId==1
+                         orderby iln.IlanId descending
+                         select iln).ToList();
+            return View(ilan);
+        }
+        public IActionResult KediIlanlari()
+        {
+            //List<Ilan> ilan = db.Ilans.Include(ilan => ilan.İlanBaslik).ToList();
+
+            var ilan = (from iln in _db.Ilans
+                        where iln.Cins.TurId == 2
+                        orderby iln.IlanId descending
+                        select iln).ToList();
+            return View(ilan);
         }
 
-        public IActionResult Privacy()
-        {
-            return View();
-        }
-
-        public IActionResult deneme()
-        {
-            return View();
-        }
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -52,6 +72,8 @@ namespace HayvanSahiplenme.Controllers
             }
 
             var ilan = await _db.Ilans
+                .Include(i => i.Cins.Tur)
+                .Include(i => i.Kullanici)
                 .FirstOrDefaultAsync(m => m.IlanId == id);
             if (ilan == null)
             {

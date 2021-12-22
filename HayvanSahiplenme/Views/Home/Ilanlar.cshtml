@@ -1,0 +1,33 @@
+﻿@model List<Ilan>
+@{
+    ViewData["Title"] = "İlanlar";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<div class="colorlib-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+                <h3>İlanlar</h3>
+            </div>
+        </div>
+
+
+        <div class="row row-pb-md">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 mb-4 text-center">
+                    <div class="product-entry border">
+                        <a asp-action="Details" asp-route-id="@item.IlanId" class="prod-img">
+                            <img src="@("/image/"+ item.Fotograf)" class="img-fluid" asp-append-version="true" />
+                        </a>
+                        <div class="desc">
+                            <h2><a href="#">@item.İlanBaslik</a></h2>
+
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
+</div>

@@ -35,7 +35,6 @@ namespace HayvanSahiplenme.Models
         [Display(Name = "Cinsiyet")]
         [StringLength(50)]
         public string Cinsiyet { get; set; }
-        [Required]
         [Display(Name = "Cinsiyet İngilizce")]
         [StringLength(50)]
         public string CinsiyetIng { get; set; }
@@ -46,7 +45,6 @@ namespace HayvanSahiplenme.Models
         [StringLength(50)]
         [Display(Name = "Aşı Durumu")]
         public string AsiDurumu { get; set; }
-        [Required]
         [Display(Name = "Aşı Durumu Ing")]
         [StringLength(50)]
         public string AsiDurumuIng { get; set; }

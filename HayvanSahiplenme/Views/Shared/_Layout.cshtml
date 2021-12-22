@@ -38,7 +38,7 @@
     <link rel="stylesheet" href="~/css/style.css">
 </head>
 <body>
-    <header>       
+    <header>
         <div id="page">
             <nav class="colorlib-nav" role="navigation">
                 <div class="top-menu">
@@ -59,10 +59,10 @@
                         <div class="row">
                             <div class="col-sm-12 text-left menu-1">
                                 <ul>
-                                    <li class="active"><a asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
-                                    <li><a a asp-area="" asp-controller="Ilans" asp-action="Index">İlanlar</a></li>
-                                    <li><a href="women.html">Köpek İlanları</a></li>
-                                    <li><a href="about.html">Kedi İlanları</a></li>
+                                    <li><a asp-area="" asp-controller="Home" asp-action="Index">Ana Sayfa</a></li>
+                                    <li><a asp-area="" asp-controller="Home" asp-action="Ilanlar">İlanlar</a></li>
+                                    <li><a asp-area="" asp-controller="Home" asp-action="KopekIlanlari">Köpek İlanları</a></li>
+                                    <li><a asp-area="" asp-controller="Home" asp-action="KediIlanlari">Kedi İlanları</></a></li>
                                     @if (User.Identity.IsAuthenticated)
                                     {
                                         if (User.IsInRole("Admin"))
@@ -77,14 +77,14 @@
                                     }
                                     <partial name="_LoginPartial" />
                                 </ul>
-                               
+
                             </div>
                         </div>
                     </div>
                 </div>
             </nav>
         </div>
-</header>
+    </header>
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -98,6 +98,8 @@
             &copy; 2021 - HayvanSahiplenme - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+   
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

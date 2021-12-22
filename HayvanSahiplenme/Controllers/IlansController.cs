@@ -11,6 +11,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HayvanSahiplenme.Controllers
 {
@@ -19,6 +20,7 @@ namespace HayvanSahiplenme.Controllers
         private readonly UserManager<Kullanici> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnvironment;
+   
 
         //public IlansController(UserManager<Kullanici> userManager)
         //{
@@ -29,6 +31,7 @@ namespace HayvanSahiplenme.Controllers
             _context = context;
             this._hostEnvironment = hostEnvironment;
             _userManager = userManager;
+           
         }
 
         // GET: Ilans
@@ -37,6 +40,18 @@ namespace HayvanSahiplenme.Controllers
             var applicationDbContext = _context.Ilans.Include(i => i.Cins).Include(i => i.Kullanici);
             return View(await applicationDbContext.ToListAsync());
         }
+       
+        public IActionResult Ilanlarim()
+        {
+            string id = _userManager.GetUserId(HttpContext.User);
+            var ilan = (from iln in _context.Ilans
+                        where iln.Kullanici.Id == id
+                        orderby iln.IlanId descending
+                        select iln).ToList();
+
+            return View(ilan);
+        }
+
 
         // GET: Ilans/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -61,6 +76,16 @@ namespace HayvanSahiplenme.Controllers
         // GET: Ilans/Create
         public IActionResult Create()
         {
+            List<string> cinsiyet = new List<string>();
+            cinsiyet.Add("Erkek");
+            cinsiyet.Add("Dişi");
+            ViewData["Cinsiyet"] = new SelectList(cinsiyet);
+
+            List<string> asiDurumu = new List<string>();
+            asiDurumu.Add("Yapıldı");
+            asiDurumu.Add("Yapılmadı");
+            ViewData["AsiDurumu"] = new SelectList(asiDurumu);
+
             ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsAd");
             ViewData["UserId"] = new SelectList(_context.Kullanici, "Id", "Id");
             return View();
@@ -111,8 +136,18 @@ namespace HayvanSahiplenme.Controllers
             {
                 return NotFound();
             }
+            List<string> cinsiyet = new List<string>();
+            cinsiyet.Add("Erkek");
+            cinsiyet.Add("Dişi");
+            ViewData["Cinsiyet"] = new SelectList(cinsiyet);
+
+            List<string> asiDurumu = new List<string>();
+            asiDurumu.Add("Yapıldı");
+            asiDurumu.Add("Yapılmadı");
+            ViewData["AsiDurumu"] = new SelectList(asiDurumu);
+
             ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsAd", ilan.CinsId);
-            ViewData["UserId"] = new SelectList(_context.Kullanici, "Id", "Id", ilan.UserId);
+            //ViewData["UserId"] = new SelectList(_context.Kullanici, "Id", "Id", ilan.UserId);
             return View(ilan);
         }
 
@@ -121,7 +156,7 @@ namespace HayvanSahiplenme.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IlanId,İlanBaslik,İlanBaslikIng,HayvanAd,CinsId,Cinsiyet,CinsiyetIng,Yas,AsiDurumu,AsiDurumuIng,Aciklama,AciklamaIng,Fotograf,UserId")] Ilan ilan)
+        public async Task<IActionResult> Edit(int id, [Bind("Tarih,IlanId,İlanBaslik,İlanBaslikIng,HayvanAd,CinsId,Cinsiyet,CinsiyetIng,Yas,AsiDurumu,AsiDurumuIng,Aciklama,AciklamaIng,Fotograf,ImageFile,UserId")] Ilan ilan)
         {
             if (id != ilan.IlanId)
             {
@@ -132,7 +167,17 @@ namespace HayvanSahiplenme.Controllers
             {
                 try
                 {
-                    ilan.Tarih = DateTime.Now;
+                    string wwwrootPath = _hostEnvironment.WebRootPath;
+                    string fileName = Path.GetFileNameWithoutExtension(ilan.ImageFile.FileName);
+                    string extension = Path.GetExtension(ilan.ImageFile.FileName);
+                    ilan.Fotograf = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                    string path = Path.Combine(wwwrootPath + "/Image/", fileName);
+                    using (var fileStream = new FileStream(path, FileMode.Create))
+                    {
+                        await ilan.ImageFile.CopyToAsync(fileStream);
+                    }
+
+                    //ilan.Tarih = DateTime.Now;
                     _context.Update(ilan);
                     await _context.SaveChangesAsync();
                 }
@@ -150,7 +195,7 @@ namespace HayvanSahiplenme.Controllers
                 return RedirectToAction(nameof(Index));
             }
             ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsAd", ilan.CinsId);
-            ViewData["UserId"] = new SelectList(_context.Kullanici, "Id", "Id", ilan.UserId);
+            //ViewData["UserId"] = new SelectList(_context.Kullanici, "Id", "Id", ilan.UserId);
             return View(ilan);
         }
 

@@ -15,22 +15,14 @@
                     <div>
                         <div class="item">
                             <div class="product-entry border">
-
                                 <img src="@("/image/"+ Model.Fotograf)" class="img-fluid" asp-append-version="true" />
-
                             </div>
                         </div>
-
-
-
                     </div>
                 </div>
                 <div class="col-sm-6">
                     <div class="product-desc">
                         <h3>@Html.DisplayFor(model => model.İlanBaslik)</h3>
-
-
-
                         <table>
                             <tr>
                                 <th><h5>İlan Tarihi :</h5></th>
@@ -38,11 +30,11 @@
                             </tr>
                             <tr>
                                 <th><h5>Tür :</h5></th>
-                                <th><h6>@Html.DisplayFor(model => model.Cins)</h6></th>
+                                <th><h6>@Html.DisplayFor(model => model.Cins.Tur.TurAd)</h6></th>
                             </tr>
                             <tr>
                                 <th><h5>Cins :</h5></th>
-                                <th><h6>@Html.DisplayFor(model => model.Cins)</h6></th>
+                                <th><h6>@Html.DisplayFor(model => model.Cins.CinsAd)</h6></th>
                             </tr>
                             <tr>
                                 <th><h5>Yaş :</h5></th>
@@ -94,29 +86,26 @@
                                     <div class="tab-pane border fade" id="pills-manufacturer" role="tabpanel" aria-labelledby="pills-manufacturer-tab">
                                         <table>
                                             <tr>
-                                                <th><h5>İlan Tarihi :</h5></th>
-                                                <th><h6>01.01.2021</h6></th>
+                                                <th><h5>Ad :</h5></th>
+                                                <th><h6>@Html.DisplayFor(model => model.Kullanici.Ad)</h6></th>
                                             </tr>
                                             <tr>
-                                                <th><h5>Tür :</h5></th>
-                                                <th><h6> Köpek</h6></th>
+                                                <th><h5>Soyad :</h5></th>
+                                                <th><h6>@Html.DisplayFor(model => model.Kullanici.Soyad)</h6></th>
                                             </tr>
                                             <tr>
-                                                <th><h5>Cins :</h5></th>
-                                                <th><h6> Pekingese</h6></th>
+                                                <th><h5>Telefon Numarası :</h5></th>
+                                                <th><h6> @Html.DisplayFor(model => model.Kullanici.TelNo)</h6></th>
                                             </tr>
                                             <tr>
-                                                <th><h5>Yaş :</h5></th>
-                                                <th><h6> 01.01.2021</h6></th>
+                                                <th><h5>Adres :</h5></th>
+                                                <th><h6> @Html.DisplayFor(model => model.Kullanici.Adress)</h6></th>
                                             </tr>
                                             <tr>
-                                                <th><h5>Cinsiyet :</h5></th>
-                                                <th><h6> 01.01.2021</h6></th>
+                                                <th><h5>E-mail :</h5></th>
+                                                <th><h6>@Html.DisplayFor(model => model.Kullanici.Email)</h6></th>
                                             </tr>
-                                            <tr>
-                                                <th><h5>Aşı Durumu :</h5></th>
-                                                <th><h6> 01.01.2021</h6></th>
-                                            </tr>
+
                                         </table>
                                     </div>
                                 </div>

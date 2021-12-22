@@ -48,9 +48,9 @@
             <th>
                 @Html.DisplayNameFor(model => model.AciklamaIng)
             </th>
-            <th>
+            @*<th>
                 @Html.DisplayNameFor(model => model.Fotograf)
-            </th>
+            </th>*@
             <th>
                 @Html.DisplayNameFor(model => model.Kullanici)
             </th>
@@ -96,9 +96,9 @@
             <td>
                 @Html.DisplayFor(modelItem => item.AciklamaIng)
             </td>
-            <td>
+            @*<td>
                 <img src="@("/image/"+ item.Fotograf)" asp-append-version="true" />
-            </td>
+            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.Kullanici.Ad)  @Html.DisplayFor(modelItem => item.Kullanici.Soyad)
             </td>

@@ -24,7 +24,7 @@ namespace HayvanSahiplenme.Areas.Identity.Pages.Account
         private readonly UserManager<Kullanici> _userManager;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-
+        
         public RegisterModel(
             UserManager<Kullanici> userManager,
             SignInManager<Kullanici> signInManager,
@@ -60,7 +60,7 @@ namespace HayvanSahiplenme.Areas.Identity.Pages.Account
             public string Soyad { get; set; }
             [Display(Name = "Telefon Numarası")]
             [Required]
-            [StringLength(50, ErrorMessage = "Maksimum uzunluk 50 olmalıdır")]
+            [Phone]
             public string TelNo { get; set; }
             [Display(Name = "Adres")]
             [Required]

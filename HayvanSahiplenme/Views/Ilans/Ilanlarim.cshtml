@@ -1,0 +1,38 @@
+﻿@model List<Ilan>
+@*
+    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+}
+<div class="colorlib-product">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8 offset-sm-2 text-center colorlib-heading">
+                <h2>İlanlar</h2>
+            </div>
+        </div>
+
+        <p>
+            <a asp-action="Create" class="text-danger font-weight-bold">Create New</a>
+        </p>
+        <div class="row row-pb-md">
+            @foreach (var item in Model)
+            {
+                <div class="col-lg-3 mb-4 text-center">
+                    <div class="product-entry border">
+                        <a asp-action="Details" asp-route-id="@item.IlanId" class="prod-img">
+                            <img src="@("/image/"+ item.Fotograf)" class="img-fluid" asp-append-version="true" />
+                        </a>
+                        <div class="desc">
+                            <h2><a href="#">@item.İlanBaslik</a></h2>
+                            <a asp-action="Edit" asp-route-id="@item.IlanId" class="text-danger">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.IlanId" class="text-danger">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IlanId" class="text-danger">Delete</a>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

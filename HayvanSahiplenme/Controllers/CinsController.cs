@@ -7,9 +7,11 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using HayvanSahiplenme.Data;
 using HayvanSahiplenme.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace HayvanSahiplenme.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class CinsController : Controller
     {
         private readonly ApplicationDbContext _context;
