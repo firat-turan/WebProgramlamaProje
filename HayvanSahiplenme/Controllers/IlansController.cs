@@ -9,18 +9,26 @@ using HayvanSahiplenme.Data;
 using HayvanSahiplenme.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using System.Security.Claims;
+using Microsoft.AspNetCore.Identity;
 
 namespace HayvanSahiplenme.Controllers
 {
     public class IlansController : Controller
     {
+        private readonly UserManager<Kullanici> _userManager;
         private readonly ApplicationDbContext _context;
         private readonly IWebHostEnvironment _hostEnvironment;
 
-        public IlansController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment)
+        //public IlansController(UserManager<Kullanici> userManager)
+        //{
+        //    _userManager = userManager;
+        //}
+        public IlansController(ApplicationDbContext context, IWebHostEnvironment hostEnvironment, UserManager<Kullanici> userManager)
         {
             _context = context;
             this._hostEnvironment = hostEnvironment;
+            _userManager = userManager;
         }
 
         // GET: Ilans
@@ -63,7 +71,7 @@ namespace HayvanSahiplenme.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IlanId,İlanBaslik,İlanBaslikIng,HayvanAd,CinsId,Cinsiyet,CinsiyetIng,Yas,AsiDurumu,AsiDurumuIng,Aciklama,AciklamaIng,ImageFile,UserId")] Ilan ilan)
+        public async Task<IActionResult> Create([Bind("IlanId,İlanBaslik,İlanBaslikIng,HayvanAd,CinsId,Cinsiyet,CinsiyetIng,Yas,AsiDurumu,AsiDurumuIng,Aciklama,AciklamaIng,ImageFile")] Ilan ilan)
         {
             if (ModelState.IsValid)
             {
@@ -77,6 +85,8 @@ namespace HayvanSahiplenme.Controllers
                     await ilan.ImageFile.CopyToAsync(fileStream);
                 }
 
+
+                ilan.UserId = _userManager.GetUserId(HttpContext.User);
                 ilan.Tarih = DateTime.Now;
 
                 _context.Add(ilan);

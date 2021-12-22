@@ -51,16 +51,20 @@ namespace HayvanSahiplenme.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
             [Required]
-            [StringLength(50)]
+            [Display(Name = "Ad")]
+            [StringLength(50, ErrorMessage="Maksimum uzunluk 50 olmalıdır")]
             public string Ad { get; set; }
+            [Display(Name = "Soyad")]
             [Required]
-            [StringLength(50)]
+            [StringLength(50, ErrorMessage = "Maksimum uzunluk 50 olmalıdır")]
             public string Soyad { get; set; }
+            [Display(Name = "Telefon Numarası")]
             [Required]
-            [StringLength(50)]
+            [StringLength(50, ErrorMessage = "Maksimum uzunluk 50 olmalıdır")]
             public string TelNo { get; set; }
+            [Display(Name = "Adres")]
             [Required]
-            [StringLength(150)]
+            [StringLength(150, ErrorMessage = "Maksimum uzunluk 150 olmalıdır")]
             public string Adress { get; set; }
 
             [Required]

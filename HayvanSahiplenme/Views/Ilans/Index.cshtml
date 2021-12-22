@@ -100,7 +100,7 @@
                 <img src="@("/image/"+ item.Fotograf)" asp-append-version="true" />
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.Kullanici.Ad)
+                @Html.DisplayFor(modelItem => item.Kullanici.Ad)  @Html.DisplayFor(modelItem => item.Kullanici.Soyad)
             </td>
             <td>
                 <a asp-action="Edit" asp-route-id="@item.IlanId">Edit</a> |
