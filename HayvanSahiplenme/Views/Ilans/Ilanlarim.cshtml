@@ -13,7 +13,7 @@
         </div>
 
         <p>
-            <a asp-action="Create" class="text-danger font-weight-bold">Create New</a>
+            <a asp-action="Create" class="text-danger font-weight-bold">Yeni İlan Oluştur</a>
         </p>
         <div class="row row-pb-md">
             @foreach (var item in Model)
@@ -25,9 +25,9 @@
                         </a>
                         <div class="desc">
                             <h2><a href="#">@item.İlanBaslik</a></h2>
-                            <a asp-action="Edit" asp-route-id="@item.IlanId" class="text-danger">Edit</a> |
-                            <a asp-action="Details" asp-route-id="@item.IlanId" class="text-danger">Details</a> |
-                            <a asp-action="Delete" asp-route-id="@item.IlanId" class="text-danger">Delete</a>
+                            <a asp-action="Edit" asp-route-id="@item.IlanId" class="text-danger">Değiştir</a> |
+                            <a asp-action="Details" asp-route-id="@item.IlanId" class="text-danger">Detay</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IlanId" class="text-danger">Sil</a>
                         </div>
                     </div>
                 </div>

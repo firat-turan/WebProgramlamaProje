@@ -116,7 +116,7 @@ namespace HayvanSahiplenme.Controllers
 
                 _context.Add(ilan);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Ilanlarim));
             }
             ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsAd", ilan.CinsId);
             ViewData["UserId"] = new SelectList(_context.Kullanici, "Id", "Id", ilan.UserId);
@@ -192,7 +192,7 @@ namespace HayvanSahiplenme.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Ilanlarim));
             }
             ViewData["CinsId"] = new SelectList(_context.Cins, "CinsId", "CinsAd", ilan.CinsId);
             //ViewData["UserId"] = new SelectList(_context.Kullanici, "Id", "Id", ilan.UserId);
@@ -232,7 +232,7 @@ namespace HayvanSahiplenme.Controllers
 
             _context.Ilans.Remove(ilan);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Ilanlarim));
         }
 
         private bool IlanExists(int id)

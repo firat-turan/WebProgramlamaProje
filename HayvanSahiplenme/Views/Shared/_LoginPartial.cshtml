@@ -10,7 +10,7 @@
 
     <li class="cart">
         <form asp-area="Identity" asp-page="/Account/Logout" asp-route-returnUrl="@Url.Action("Index", "Home", new { area = "" })">
-            <button type="submit" class="nav-link btn btn-link text-blue">Logout</button>
+            <button type="submit" class="nav-link btn btn-link text-blue">Çıkış</button>
         </form>
     </li>
     <li class="cart active">
@@ -30,10 +30,10 @@
 else
 {
     <li class="cart">
-        <a asp-area="Identity" asp-page="/Account/Register">Register</a>
+        <a asp-area="Identity" asp-page="/Account/Register">Kayıt Ol</a>
     </li>
     <li class="cart">
-        <a asp-area="Identity" asp-page="/Account/Login">Login</a>
+        <a asp-area="Identity" asp-page="/Account/Login">Giriş Yap</a>
     </li>
 }
 
